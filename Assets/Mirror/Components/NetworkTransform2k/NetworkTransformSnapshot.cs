@@ -1,9 +1,10 @@
 // snapshot for snapshot interpolation
 // https://gafferongames.com/post/snapshot_interpolation/
 // position, rotation, scale for compatibility for now.
+
 using UnityEngine;
 
-namespace Mirror
+namespace Mirror.Components.NetworkTransform2k
 {
     // NetworkTransform Snapshot
     public struct NTSnapshot : Snapshot

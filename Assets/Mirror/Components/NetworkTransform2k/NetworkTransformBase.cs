@@ -23,7 +23,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mirror
+namespace Mirror.Components.NetworkTransform2k
 {
     public abstract class NetworkTransformBase : NetworkBehaviour
     {

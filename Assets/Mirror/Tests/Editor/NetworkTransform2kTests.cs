@@ -1,6 +1,8 @@
 // TODO add true over-the-network movement tests.
 //      but we need to split NetworkIdentity.spawned in server/client first.
 //      atm we can't spawn an object on both server & client separately yet.
+
+using Mirror.Components.NetworkTransform2k;
 using NUnit.Framework;
 using UnityEngine;
 

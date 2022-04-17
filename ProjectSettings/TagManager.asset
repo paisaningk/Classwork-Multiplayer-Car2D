@@ -39,6 +39,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: "\u0E3ABG"
+    uniqueID: 3622505425
+    locked: 0
+  - name: Skid Marks
+    uniqueID: 808010119
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particle
+    uniqueID: 397847585
     locked: 0

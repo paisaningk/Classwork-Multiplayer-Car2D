@@ -4,9 +4,10 @@
 //
 // A small number of astronomers suggested that ʻOumuamua could be a product of
 // alien technology, but evidence in support of this hypothesis is weak.
+
 using UnityEngine;
 
-namespace Mirror
+namespace Mirror.Components.NetworkTransform2k
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("Network/Network Transform")]
