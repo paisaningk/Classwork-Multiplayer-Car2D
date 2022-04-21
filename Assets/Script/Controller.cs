@@ -1,3 +1,4 @@
+using Cinemachine;
 using Mirror;
 using UnityEngine;
 
@@ -31,10 +32,10 @@ namespace Script
     
         public override void OnStartLocalPlayer()
         {
-            // var setCamera = GameObject.FindWithTag("Cam").GetComponent<CinemachineVirtualCamera>();
-            // var gameobject = this.gameObject;
-            // setCamera.LookAt = gameobject.transform;
-            // setCamera.Follow = gameobject.transform;
+            var setCamera = GameObject.FindWithTag("Cam").GetComponent<CinemachineVirtualCamera>();
+            var gameobject = this.gameObject;
+            setCamera.LookAt = gameobject.transform;
+            setCamera.Follow = gameobject.transform;
         }
     }
 }
