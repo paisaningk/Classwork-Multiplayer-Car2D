@@ -1,5 +1,7 @@
+using System;
 using Mirror;
 using Steamworks;
+using UnityEngine;
 
 namespace Script.Network
 {
@@ -15,6 +17,10 @@ namespace Script.Network
         public string playerName;
         [SyncVar(hook = nameof(PlayerReadyUpdate))]
         public bool isReady;
+
+        [SyncVar(hook = nameof(SendPlayerCarColor))]
+        public int playerCarColor;
+       
     
         private CustomNetworkManager manager;
         private CustomNetworkManager Manager
@@ -34,7 +40,7 @@ namespace Script.Network
         {
             DontDestroyOnLoad(this.gameObject);
         }
-    
+
         private void PlayerReadyUpdate(bool oldValue, bool newValue)
         {
             if (isServer)
@@ -59,7 +65,6 @@ namespace Script.Network
             if (hasAuthority)
             {
                 CmdPlayerReady();
-                
             }
         }
 
@@ -68,6 +73,7 @@ namespace Script.Network
             CmdSetPlayerName(SteamFriends.GetPersonaName().ToString());
             gameObject.name = "LocalGamePlayer";
             //LobbyController.instance.FindLocalPlayer();
+            LobbyController.instance.FindLocalPlayer();
             LobbyController.instance.UpdateLobbyName();
             
         }
@@ -114,9 +120,34 @@ namespace Script.Network
         }
 
         [Command]
-        public void CmdCanStartGame(string sceneName)
+        private void CmdCanStartGame(string sceneName)
         {
-            //manager.StartGame(sceneName);
+            Manager.StartGame(sceneName);
+        }
+
+
+        [Command]
+        public void CmdUpdatePlayerCarColor(int newValue)
+        {
+            SendPlayerCarColor(playerCarColor,newValue);
+        }
+
+        public void SendPlayerCarColor(int oldValue, int newValue)
+        {
+            if (isServer)
+            {
+                playerCarColor = newValue;
+            }
+
+            if (isClient && (oldValue != newValue))
+            {
+                UpdateCarColor(newValue);
+            }
+        }
+
+        public void UpdateCarColor(int message)
+        {
+            playerCarColor = message;
         }
     }
 }

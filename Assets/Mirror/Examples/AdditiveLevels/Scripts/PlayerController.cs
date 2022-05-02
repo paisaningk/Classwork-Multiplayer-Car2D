@@ -1,5 +1,4 @@
-﻿using Mirror.Components.NetworkTransform2k;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Mirror.Examples.AdditiveLevels
 {

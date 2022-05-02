@@ -15,6 +15,8 @@ namespace Script.Network
 
         public TextMeshProUGUI playerNameText;
         public RawImage playerIcon;
+        public TextMeshProUGUI playerReadyText;
+        public bool isReady;
 
         protected Callback<AvatarImageLoaded_t> imageLoaded;
 
@@ -23,12 +25,29 @@ namespace Script.Network
             imageLoaded = Callback<AvatarImageLoaded_t>.Create(OnImageLoaded);
         }
 
+        public void ChangeReadyStatus()
+        {
+            if (isReady)
+            {
+                playerReadyText.text = "Ready";
+                playerReadyText.color = Color.green;
+            }
+            else
+            {
+                playerReadyText.text = "Unready";
+                playerReadyText.color = Color.red;
+            }
+        }
+
+
         public void SetPlayerValues()
         {
             playerNameText.text = playerName;
+            ChangeReadyStatus();
             if (!avatarReceived)
             {
                 GetPlayerIcon();
+                
             }
         }
 

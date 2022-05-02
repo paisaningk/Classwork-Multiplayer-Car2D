@@ -1,10 +1,11 @@
-using System;
 using System.Collections;
 using Cinemachine;
 using Mirror;
+using Script.Network;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-namespace Script
+namespace Script.Car
 {
     public class CarController : NetworkBehaviour
     {
@@ -20,6 +21,7 @@ namespace Script
         [Header("Jumping")] 
         public AnimationCurve jumpCurve;
         public ParticleSystem landingParticleSystem;
+        [Header("Setup")] public GameObject Setup;
         
         private float accelerationInput;
         private float steeringInput;
@@ -29,17 +31,30 @@ namespace Script
         private Rigidbody2D rb;
         private Collider2D collider2D;
         private CarSfxHandler carSfxHandler;
+        private PlayerData playerData;
+        
+        //CheckPoint 
+        public GameObject[] checkPoints;
+        public int currentIndexCheckPoint;
+        public bool isFinishLine = false;
+        public bool isSetup = false;
 
         private void Awake()
         {
+            isFinishLine = false;
+            currentIndexCheckPoint = 0;
             collider2D = GetComponentInChildren<Collider2D>();
             rb = GetComponent<Rigidbody2D>();
             carSfxHandler = GetComponent<CarSfxHandler>();
+            playerData = GetComponent<PlayerData>();
+            Setup.SetActive(false);
         }
 
         public void Update()
         {
             // Get input
+            CheckPoint();
+            CheckScene();
             float inputX = Input.GetAxis ("Horizontal");
             float inputY = Input.GetAxis ("Vertical");
             steeringInput = inputX;
@@ -55,6 +70,41 @@ namespace Script
             ApplyEngineForce();
             KillOrthogonalVelocity();
             ApplySteering();
+        }
+
+        private void CheckPoint()
+        {
+            if (!isLocalPlayer) return;
+            if (!isSetup) return;
+            
+            if (SceneManager.GetActiveScene().name != "Map") return;
+            if (currentIndexCheckPoint == checkPoints.Length)
+            {
+                isFinishLine = true;
+                return;
+            }
+            var checking = checkPoints[currentIndexCheckPoint].GetComponent<CheckPoint>().isPast;
+            checkPoints[currentIndexCheckPoint].SetActive(!checking);
+            if (checking == true)
+            {
+                checkPoints[currentIndexCheckPoint].SetActive(!checking);
+                currentIndexCheckPoint++;
+            }
+        }
+
+        private void CheckScene()
+        {
+            if (SceneManager.GetActiveScene().name != "Map") return;
+            playerData.UpdateColor();
+            Setup.SetActive(true);
+            if (isLocalPlayer)
+            {
+                var setCamera = GameObject.FindWithTag("MainCamera").GetComponentInChildren<CinemachineVirtualCamera>();
+                var gameObject = this.gameObject;
+                setCamera.LookAt = gameObject.transform;
+                setCamera.Follow = gameObject.transform;
+            }
+
         }
 
         private void ApplyEngineForce()
@@ -236,14 +286,6 @@ namespace Script
                 JumpData jumpData = col.GetComponent<JumpData>();
                 Jump(jumpData.jumpHeightScale,jumpData.jumpPushScale);
             }
-        }
-        
-        public override void OnStartLocalPlayer()
-        {
-            var setCamera = GameObject.FindWithTag("MainCamera").GetComponentInChildren<CinemachineVirtualCamera>();
-            var gameobject = this.gameObject;
-            setCamera.LookAt = gameobject.transform;
-            setCamera.Follow = gameobject.transform;
         }
     }
 }

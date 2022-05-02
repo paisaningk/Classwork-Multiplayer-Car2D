@@ -77,3 +77,18 @@ Assets/Feel/FeelDemosHDRP/MoreMountains.Feel.Demos.HDRP.asmdef.meta
 Assets/Feel/FeelDemosHDRP/
 Assets/Feel/FeelDemosURP/
 Assets/Feel/MMFeedbacks/Demos/
+
+# Ignore the auto-generated AOT compatibility dll.
+/Assets/Plugins/Sirenix/Assemblies/AOT/*
+
+# Ignore all unpacked demos.
+/Assets/Plugins/Sirenix/Demos/*
+
+# But keep the demo packages themselves.
+!/Assets/Plugins/Sirenix/Demos/*.unitypackage 
+Assets/Plugins/Feel/FeelDemos/
+Assets/Plugins/Feel/MMFeedbacks/Demos/MMFeedbacksDemo/TestScene/Lightmap-0_comp_dir.png
+Assets/Plugins/Feel/MMFeedbacks/Demos/MMFeedbacksDemo/
+Assets/Plugins/Feel/MMFeedbacks/Demos/
+Assets/Plugins/Feel/NiceVibrations/Demo/_Common/Scripts/UI/HapticCurve.cs.meta
+Assets/Plugins/Feel/NiceVibrations/Demo/

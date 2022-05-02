@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Script
+namespace Script.Car
 {
     public class JumpData : MonoBehaviour
     {

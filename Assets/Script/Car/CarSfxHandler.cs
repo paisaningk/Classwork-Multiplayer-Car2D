@@ -1,9 +1,8 @@
-using System;
 using Mirror;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Script
+namespace Script.Car
 {
     public class CarSfxHandler : NetworkBehaviour
     {

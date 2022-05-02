@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Cam
   - Jump
+  - CheckPoint
+  - PlayerHitbox
   layers:
   - Default
   - TransparentFX
