@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Multimap_2.unity
+    guid: a281837f1fcb102469d925382a940452
+  - enabled: 1
+    path: Assets/Scenes/Multimap_3.unity
+    guid: a5309dd896d379347a4a3ff3114bfa6d
   m_configObjects: {}

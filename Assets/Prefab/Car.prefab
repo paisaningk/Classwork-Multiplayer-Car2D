@@ -15557,7 +15557,9 @@ MonoBehaviour:
   Setup: {fileID: 3261279441753739261}
   isJumping: 0
   checkPoints: []
+  currentIndexCheckPoint: 0
   isFinishLine: 0
+  isSetup: 0
 --- !u!114 &597372521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15668,6 +15670,8 @@ MonoBehaviour:
   playerIDNumber: 0
   characterIndex: 0
   playerSteamID: 0
+  isFinish: 0
+  finishTimeInSec: 0
   playerName: 
   isReady: 0
   playerCarColor: 0
@@ -15687,6 +15691,11 @@ MonoBehaviour:
   carColor:
   - {fileID: 21300000, guid: dcb33f0929f0cf442a52fb27390431b7, type: 3}
   - {fileID: 21300000, guid: 0f891141ea975b641a076a8682f271fe, type: 3}
+  - {fileID: 21300000, guid: e57fdefb1ccc6664bab17a0d6f344edb, type: 3}
+  - {fileID: 21300000, guid: f8291ad3ddd1f1e49ac5906971890fe9, type: 3}
+  - {fileID: 21300000, guid: d22818583ea302245b7e9c8dc327e151, type: 3}
+  - {fileID: 21300000, guid: 310f7a6ea8b7b044da78e479b51abb50, type: 3}
+  - {fileID: 21300000, guid: d81a72922b1b92a458c2e7cc7c6be943, type: 3}
 --- !u!1 &2755306588487515747
 GameObject:
   m_ObjectHideFlags: 0

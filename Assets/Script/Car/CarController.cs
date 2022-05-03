@@ -52,6 +52,7 @@ namespace Script.Car
 
         public void Update()
         {
+            if (SceneManager.GetActiveScene().name == "Lobby") return;
             // Get input
             CheckPoint();
             CheckScene();
@@ -77,7 +78,6 @@ namespace Script.Car
             if (!isLocalPlayer) return;
             if (!isSetup) return;
             
-            if (SceneManager.GetActiveScene().name != "Map") return;
             if (currentIndexCheckPoint == checkPoints.Length)
             {
                 isFinishLine = true;
@@ -94,7 +94,6 @@ namespace Script.Car
 
         private void CheckScene()
         {
-            if (SceneManager.GetActiveScene().name != "Map") return;
             playerData.UpdateColor();
             Setup.SetActive(true);
             if (isLocalPlayer)

@@ -12,6 +12,8 @@ namespace Script.Network
         [SyncVar] public int playerIDNumber;
         [SyncVar] public int characterIndex;
         [SyncVar] public ulong playerSteamID;
+        [SyncVar] public bool isFinish;
+        [SyncVar] public float finishTimeInSec;
 
         [SyncVar(hook = nameof(PlayerNameUpdate))]
         public string playerName;
@@ -148,6 +150,18 @@ namespace Script.Network
         public void UpdateCarColor(int message)
         {
             playerCarColor = message;
+        }
+
+        [Command]
+        public void SetIsFinish(bool finish)
+        {
+            isFinish = finish;
+        }
+
+        [Command]
+        public void SetTime(float time)
+        {
+            finishTimeInSec = time;
         }
     }
 }

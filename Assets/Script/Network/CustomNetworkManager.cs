@@ -31,5 +31,12 @@ namespace Script.Network
       {
          ServerChangeScene(SceneName);
       }
+
+      
+      public void Logout()
+      {
+         StopHost();
+         StopClient();
+      }
    }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Jump
   - CheckPoint
   - PlayerHitbox
+  - Music
   layers:
   - Default
   - TransparentFX

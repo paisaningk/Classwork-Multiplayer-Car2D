@@ -33,7 +33,7 @@ namespace Script.Network
         //Manager
         private CustomNetworkManager manager;
 
-        private CustomNetworkManager Manager
+        public CustomNetworkManager Manager
         {
             get
             {
@@ -83,6 +83,11 @@ namespace Script.Network
                 if (localPlayerController.playerIDNumber == 1)
                 {
                     startGameButton.interactable = true;
+                    foreach (PlayerObjectLobby player in Manager.gamePlayers)
+                    {
+                        player.isFinish = false;
+                    }
+                    
                 }
                 else
                 {
@@ -218,9 +223,14 @@ namespace Script.Network
             }
         }
     
-        public void StartGame(string sceneName)
+        public void StartGame(string nameMap)
         {
-            localPlayerController.CanStartGame(sceneName);
+            localPlayerController.CanStartGame(nameMap);
+        }
+
+        public void Quit()
+        {
+            Manager.Logout();
         }
     }
 }
