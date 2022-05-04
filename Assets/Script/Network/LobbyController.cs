@@ -228,6 +228,11 @@ namespace Script.Network
             localPlayerController.CanStartGame(nameMap);
         }
 
+        public void DestroyMusic()
+        {
+            //Destroy (GameObject.FindGameObjectWithTag("Music"));
+        }
+
         public void Quit()
         {
             Manager.Logout();

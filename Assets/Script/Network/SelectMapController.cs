@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using System;
+using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,9 +16,9 @@ namespace Script.Network
         public Map[] map;
 
         [Header("Var Select Map")]
-        public int currentIndex = 0;
+        [SyncVar]public int currentIndex = 0;
         [SyncVar]public string nameMap;
-        public RawImage currentImage;
+        [SyncVar]public GameObject currentImage;
         
         [Header("Button")]
         public Button nextButton;
@@ -26,7 +27,7 @@ namespace Script.Network
 
         private void Start()
         {
-            currentImage.texture = map[currentIndex].mapSprites.texture;
+            currentImage.GetComponent<RawImage>().texture = map[currentIndex].mapSprites.texture;
             nameMap = map[currentIndex].mapName;
             nextButton.onClick.AddListener(NextMap);
             previousButton.onClick.AddListener(PreviousMap);
@@ -38,6 +39,11 @@ namespace Script.Network
 
         }
 
+        private void Update()
+        {
+            currentImage.GetComponent<RawImage>().texture = map[currentIndex].mapSprites.texture;
+        }
+
         private void StartGame()
         {
             LobbyController.instance.Manager.StartGame(nameMap);
@@ -46,16 +52,14 @@ namespace Script.Network
 
         private void NextMap()
         {
-            if (currentIndex <= map.Length -1)
+            if (currentIndex < map.Length -1)
             {
                 currentIndex++;
-                currentImage.texture = map[currentIndex].mapSprites.texture;
                 nameMap = map[currentIndex].mapName;
             }
             else
             {
                 currentIndex = 0;
-                currentImage.texture = map[currentIndex].mapSprites.texture;
                 nameMap = map[currentIndex].mapName;
             }
         }
@@ -65,13 +69,11 @@ namespace Script.Network
             if (currentIndex > 0)
             {
                 currentIndex--;
-                currentImage.texture = map[currentIndex].mapSprites.texture;
                 nameMap = map[currentIndex].mapName;
             }
             else
             {
                 currentIndex = map.Length -1;
-                currentImage.texture = map[currentIndex].mapSprites.texture;
                 nameMap = map[currentIndex].mapName;
             }
         }

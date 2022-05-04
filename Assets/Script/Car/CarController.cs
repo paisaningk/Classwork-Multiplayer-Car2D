@@ -32,12 +32,13 @@ namespace Script.Car
         private Collider2D collider2D;
         private CarSfxHandler carSfxHandler;
         private PlayerData playerData;
-        
+
         //CheckPoint 
         public GameObject[] checkPoints;
         public int currentIndexCheckPoint;
         public bool isFinishLine = false;
         public bool isSetup = false;
+        public bool isCanGo = false;
 
         private void Awake()
         {
@@ -53,6 +54,7 @@ namespace Script.Car
         public void Update()
         {
             if (SceneManager.GetActiveScene().name == "Lobby") return;
+
             // Get input
             CheckPoint();
             CheckScene();
@@ -65,6 +67,7 @@ namespace Script.Car
         
         public void FixedUpdate()
         {
+            if (!isCanGo) return;
             //check is local player
             if (!isLocalPlayer) return;
             

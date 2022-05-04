@@ -1606,6 +1606,7 @@ GameObject:
   - component: {fileID: 1297764849}
   - component: {fileID: 1297764851}
   - component: {fileID: 1297764850}
+  - component: {fileID: 1297764852}
   m_Layer: 5
   m_Name: RawImage
   m_TagString: Untagged
@@ -1667,6 +1668,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297764848}
   m_CullTransparentMesh: 1
+--- !u!114 &1297764852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297764848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 991061824
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &1345563695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,6 +2109,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Map
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 222108260}
+        m_TargetAssemblyTypeName: Script.Network.LobbyController, Assembly-CSharp
+        m_MethodName: DestroyMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1565000956
@@ -2893,7 +2923,7 @@ MonoBehaviour:
     mapSprites: {fileID: 21300000, guid: 7c321709df094cb47976d863f8b589d0, type: 3}
   currentIndex: 0
   nameMap: 
-  currentImage: {fileID: 1297764850}
+  currentImage: {fileID: 1297764848}
   nextButton: {fileID: 575477049}
   previousButton: {fileID: 704020842}
   startGameButton: {fileID: 307674955}

@@ -24,7 +24,7 @@ namespace Script.Network
             if(lobbyName =="")
             {
                 lobbyNameText.text = "Empty";
-                lobbyNameText.color = Color.gray;
+                lobbyNameText.color = Color.white;
                 joinButton.interactable = false;
             }
             else
@@ -38,7 +38,7 @@ namespace Script.Network
                 }
                 else
                 {
-                    lobbyNameText.color = Color.gray;
+                    lobbyNameText.color = Color.white;
                     joinButton.interactable = false;
                 }
             

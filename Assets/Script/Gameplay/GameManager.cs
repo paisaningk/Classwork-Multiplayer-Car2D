@@ -22,10 +22,14 @@ namespace Script
         [SyncVar] public float time;
         public List<GameObject> listWinInContent;
         public AudioSource winAudioSource;
-
+        public bool isEveryoneReady = false;
+        public bool isEveryoneCanGo = false;
+        [SyncVar]public float timeCoolDown = 5;
+        
         [Header("Gameplay UI")]
         public TextMeshProUGUI timeText;
         public TextMeshProUGUI lapsText;
+        public GameObject startText;
         [Header("Finish Line UI")]
         public GameObject win;
         public GameObject winViewContent;
@@ -35,6 +39,30 @@ namespace Script
         void Start()
         {
             Destroy (GameObject.FindGameObjectWithTag("Music"));
+
+            SetPosition();
+
+            SetCheckpoint();
+            
+            timeText.text = $"{time:m\\:ss\\.fff}";
+            lapsText.text = $"{player.GetComponent<CarController>().currentIndexCheckPoint} / {checkPoint.Length} Laps";
+        }
+
+        private void Update()
+        {
+            EveryoneReady();
+            TimerAndLaps();
+            CheckIsFinishLine();
+            CheckWin();
+
+            if (allWin)
+            {
+                quitButton.interactable = enabled;
+            }
+        }
+
+        private void SetPosition()
+        {
             players = GameObject.FindGameObjectsWithTag("Player");
             for (int i = 0; i < players.Length; i++)
             {
@@ -47,30 +75,56 @@ namespace Script
                     player = players[i];
                 }
             }
+        }
+
+        private void SetCheckpoint()
+        {
             for (int i = 1; i < checkPoint.Length ; i++)
             {
                 checkPoint[i].SetActive(false);
             }
         }
 
-        private void Update()
+        private void EveryoneReady()
         {
-            TimerAndLaps();
-            CheckIsFinishLine();
-            CheckWin();
-
-            if (allWin)
+            if (!isEveryoneCanGo)
             {
-                quitButton.interactable = enabled;
+                foreach (var player in players)
+                {
+                    if (player.GetComponent<CarController>().isSetup)
+                    {
+                        isEveryoneReady = true;
+                    }
+                }
+
+                if (isEveryoneReady)
+                {
+                    timeCoolDown -= Time.deltaTime;
+                    startText.GetComponent<TextMeshProUGUI>().text = $"{(int)timeCoolDown}";
+                }
+
+                if (timeCoolDown < 0)
+                {
+                    foreach (var player in players)
+                    {
+                        player.GetComponent<CarController>().isCanGo = true;
+                    }
+                    startText.SetActive(false);
+                    isEveryoneCanGo = true;
+                    winAudioSource.Play();
+                }
             }
         }
 
         private void TimerAndLaps()
         {
-            time += Time.deltaTime;
-            TimeSpan timeSpan = TimeSpan.FromSeconds(time);
-            timeText.text = $"{timeSpan:m\\:ss\\.fff}";
-            lapsText.text = $"{player.GetComponent<CarController>().currentIndexCheckPoint} / {checkPoint.Length} Laps";
+            if (isEveryoneCanGo)
+            {
+                time += Time.deltaTime;
+                TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+                timeText.text = $"{timeSpan:m\\:ss\\.fff}";
+                lapsText.text = $"{player.GetComponent<CarController>().currentIndexCheckPoint} / {checkPoint.Length} Laps";
+            }
         }
 
         private void CheckIsFinishLine()

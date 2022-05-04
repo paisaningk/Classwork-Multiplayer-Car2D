@@ -1,15 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuMusic : MonoBehaviour
 {
+    public static MainMenuMusic instance;
     private void Start()
     {
-        DontDestroyOnLoad(this);
+        if (instance != null && instance != this)
+            Destroy(this.gameObject);
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     private void Update()
